@@ -1,0 +1,8 @@
+# Demo env settings
+PS1='$ '
+export KUBECONFIG=`pwd`/kubeconfig
+
+# kubectl settings
+export PATH=$(pwd)/bin:$PATH
+source <(kubectl completion bash)
+

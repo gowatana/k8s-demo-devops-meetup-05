@@ -1,0 +1,29 @@
+---
+kind: TanzuKubernetesCluster
+apiVersion: run.tanzu.vmware.com/v1alpha1
+metadata:
+  name: tkg-cluster-41
+spec:
+  distribution:
+    version: v1.17.8
+  topology:
+    controlPlane:
+      count: 1
+      class: best-effort-xsmall
+      storageClass: vm-storage-policy-wcp
+    workers:
+      count: 1
+      class: best-effort-xsmall
+      storageClass: vm-storage-policy-wcp
+  settings:
+    network:
+      cni:
+        name: calico
+      services:
+        cidrBlocks: ["172.30.0.0/19"] # Cannot overlap with Supervisor Cluster
+      pods:
+        cidrBlocks: ["172.31.0.0/19"] # Cannot overlap with Supervisor Cluster
+    storage:
+      classes: ["vm-storage-policy-wcp"]  # Named PVC storage classes
+      defaultClass: vm-storage-policy-wcp # Default PVC storage class
+
